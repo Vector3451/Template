@@ -1,0 +1,26 @@
+# Dependencies — never needed in context
+node_modules/
+.pnp
+.pnp.js
+
+# Build outputs
+.next/
+out/
+dist/
+build/
+
+# Environment (sensitive)
+.env
+.env.local
+.env.*.local
+
+# Generated / cache
+.cache/
+coverage/
+*.tsbuildinfo
+next-env.d.ts
+
+# Large static assets
+public/videos/
+*.mp4
+*.mov
