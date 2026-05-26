@@ -9,3 +9,10 @@ Change these to whatever you are building :
 
 - In **docs/ARCHITECTURE.md**, change the overview to what your project is supposed to be.
 - In **AGENT.md**, change the **PROJECT NAME**, and the **description.**
+
+
+## THINGS TO DO
+
+Before coming to the hackathons, do the following things first : 
+1. Clone this repo, to the appropriate place where required. **git clone https://github.com/Vector3451/Template.git**.
+2. 
