@@ -1,14 +1,7 @@
-/**
- * types/index.ts — Shared TypeScript types.
- * Domain types go here. Component-specific props stay co-located.
- */
-
-/** Standard API response envelope */
 export type ApiResponse<T> =
   | { success: true; data: T }
   | { success: false; error: string };
 
-/** Paginated list result */
 export interface PaginatedResult<T> {
   items: T[];
   total: number;
@@ -17,5 +10,56 @@ export interface PaginatedResult<T> {
   hasMore: boolean;
 }
 
-// Add your domain types below:
-// export interface User { id: string; name: string; email: string; }
+export interface Product {
+  id: string;
+  name: string;
+  slug: string;
+  description: string;
+  price: number;
+  compareAtPrice?: number;
+  images: string[];
+  category: Category;
+  tags: string[];
+  rating: number;
+  reviewCount: number;
+  inStock: boolean;
+  createdAt: string;
+}
+
+export interface Category {
+  id: string;
+  name: string;
+  slug: string;
+  image?: string;
+}
+
+export interface CartItem {
+  product: Product;
+  quantity: number;
+}
+
+export interface Order {
+  id: string;
+  items: CartItem[];
+  subtotal: number;
+  tax: number;
+  shipping: number;
+  total: number;
+  status: "pending" | "paid" | "shipped" | "delivered" | "cancelled";
+  shippingAddress: Address;
+  createdAt: string;
+}
+
+export interface Address {
+  line1: string;
+  line2?: string;
+  city: string;
+  state: string;
+  zip: string;
+  country: string;
+}
+
+export interface CheckoutSession {
+  url: string;
+  sessionId: string;
+}

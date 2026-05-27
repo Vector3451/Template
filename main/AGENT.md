@@ -5,23 +5,27 @@
 > A stale AGENT.md is worse than no AGENT.md.
 
 ## What is this?
-[PROJECT NAME] — [one sentence: what it does and who it's for].
-For a hackathon. Move fast. Ship working features.
+E-Commerce Store — a hackathon-ready e-commerce template with product catalog, shopping cart, and checkout flow. Modify based on the problem statement.
 
 ## Stack
 - **Framework**: Next.js 14 (App Router) + TypeScript
 - **Styling**: Tailwind CSS + shadcn/ui
+- **State**: Zustand (cart persisted to localStorage)
+- **Payments**: Stripe (swap mock for real keys)
 - **Database**: (fill in: Postgres / SQLite / Supabase / none)
 - **Auth**: (fill in: NextAuth / Clerk / none)
 - **Deployment**: Vercel
 
 ## Directory Map
-<!-- Keep this file updated. When you add a file to this directory, add a one-line entry below. -->
 ```
 src/app/             → Next.js pages & API routes (App Router)
+src/app/products/    → Product catalog & detail pages
+src/app/checkout/    → Checkout page
+src/app/api/         → API route handlers (products, checkout, health)
 src/components/ui/   → shadcn/ui primitives (DO NOT edit)
 src/components/layout/  → header, footer, nav, shell wrappers
-src/components/features/  → feature-specific components
+src/components/features/  → ProductCard, CartDrawer, feature-specific
+src/lib/store/       → Zustand stores (cart)
 src/lib/utils/       → pure utility functions (no side effects)
 src/lib/hooks/       → custom React hooks
 src/lib/api/         → server-side data fetching & mutations
@@ -33,6 +37,7 @@ docs/                → specs, wireframes, ADRs
 
 ## Commands
 ```bash
+npm install          # install dependencies (run first)
 npm run dev          # start dev server (localhost:3000)
 npm run build        # production build
 npm run lint         # ESLint + TypeScript check
@@ -56,12 +61,12 @@ npm run test         # run tests
 - Error handling: never swallow errors silently — log or surface them
 
 ## Conventions
-<!-- Keep these updated. Only remove entries if a convention is obsoleted. -->
-- Components: PascalCase (`UserCard.tsx`)
+- Components: PascalCase (`ProductCard.tsx`)
 - Hooks: camelCase with `use` prefix (`useAuth.ts`)
 - Utils: camelCase (`formatDate.ts`)
 - API routes: kebab-case files (`/api/user-profile/route.ts`)
-- Types/interfaces: PascalCase with descriptive names (`UserProfile`, not `IUser`)
+- Types/interfaces: PascalCase with descriptive names (`CartItem`, not `ICartItem`)
+- Store files: camelCase (`cart.ts`)
 
 ## Never Do
 - Never commit `.env` or `.env.local`
@@ -70,8 +75,6 @@ npm run test         # run tests
 - Never store secrets in code — use environment variables
 
 ## Maintenance Contract
-<!-- This section is non-negotiable. Follow it every session. -->
-
 After completing ANY task, you must update documentation before finishing:
 
 - New route or API endpoint → add it to docs/ARCHITECTURE.md under "Endpoints"
