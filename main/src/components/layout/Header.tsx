@@ -41,13 +41,19 @@ export function Header() {
           {/* Auth buttons — desktop */}
           {status === "authenticated" ? (
             <div className="hidden items-center gap-2 md:flex">
-              {session.user?.image && (
-                <img
-                  src={session.user.image}
-                  alt=""
-                  className="h-7 w-7 rounded-full"
-                />
-              )}
+              <Link
+                href="/account"
+                className="flex items-center gap-1.5 rounded-md px-3 py-1.5 text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
+              >
+                {session.user?.image && (
+                  <img
+                    src={session.user.image}
+                    alt=""
+                    className="h-6 w-6 rounded-full"
+                  />
+                )}
+                Account
+              </Link>
               <button
                 onClick={() => signOut({ callbackUrl: "/" })}
                 className="flex items-center gap-1.5 rounded-md px-3 py-1.5 text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"

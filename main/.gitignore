@@ -34,3 +34,6 @@ Thumbs.db
 coverage/
 *.tsbuildinfo
 next-env.d.ts
+
+# Generated
+src/generated/
