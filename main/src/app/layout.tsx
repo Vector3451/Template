@@ -4,6 +4,7 @@ import "@/styles/globals.css";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { CartDrawer } from "@/components/features/CartDrawer";
+import { SessionProvider } from "@/components/auth/SessionProvider";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -16,10 +17,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en">
       <body className={`${inter.className} flex min-h-screen flex-col`}>
-        <Header />
-        <main className="flex-1">{children}</main>
-        <Footer />
-        <CartDrawer />
+        <SessionProvider>
+          <Header />
+          <main className="flex-1">{children}</main>
+          <Footer />
+          <CartDrawer />
+        </SessionProvider>
       </body>
     </html>
   );

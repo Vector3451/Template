@@ -28,7 +28,7 @@ export function CartDrawer() {
           <div className="flex items-center gap-2">
             <ShoppingBag className="h-5 w-5" />
             <span className="font-semibold">
-              Cart {itemCount > 0 && `(${itemCount})`}
+              Cart {itemCount() > 0 && `(${itemCount()})`}
             </span>
           </div>
           <button

@@ -1,9 +1,10 @@
 "use client";
 
 import Link from "next/link";
-import { ShoppingCart, Menu, X } from "lucide-react";
+import { ShoppingCart, Menu, X, LogIn, LogOut } from "lucide-react";
 import { useState } from "react";
 import { useCartStore } from "@/lib/store/cart";
+import { useSession, signOut } from "next-auth/react";
 import { cn } from "@/lib/utils/cn";
 
 const navLinks = [
@@ -15,6 +16,7 @@ export function Header() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const itemCount = useCartStore((s) => s.itemCount());
   const openCart = useCartStore((s) => s.open);
+  const { data: session, status } = useSession();
 
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-background">
@@ -35,7 +37,36 @@ export function Header() {
           ))}
         </nav>
 
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-2">
+          {/* Auth buttons — desktop */}
+          {status === "authenticated" ? (
+            <div className="hidden items-center gap-2 md:flex">
+              {session.user?.image && (
+                <img
+                  src={session.user.image}
+                  alt=""
+                  className="h-7 w-7 rounded-full"
+                />
+              )}
+              <button
+                onClick={() => signOut({ callbackUrl: "/" })}
+                className="flex items-center gap-1.5 rounded-md px-3 py-1.5 text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
+                title="Sign out"
+              >
+                <LogOut className="h-4 w-4" />
+                Sign out
+              </button>
+            </div>
+          ) : (
+            <Link
+              href="/login"
+              className="hidden items-center gap-1.5 rounded-md px-3 py-1.5 text-sm font-medium text-muted-foreground transition-colors hover:text-foreground md:flex"
+            >
+              <LogIn className="h-4 w-4" />
+              Sign in
+            </Link>
+          )}
+
           <button
             onClick={openCart}
             className="relative rounded-md p-2 text-muted-foreground transition-colors hover:text-foreground"
@@ -71,6 +102,26 @@ export function Header() {
               {link.label}
             </Link>
           ))}
+          <div className="mt-2 border-t pt-2">
+            {status === "authenticated" ? (
+              <button
+                onClick={() => signOut({ callbackUrl: "/" })}
+                className="flex w-full items-center gap-2 rounded-md px-3 py-2 text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
+              >
+                <LogOut className="h-4 w-4" />
+                Sign out
+              </button>
+            ) : (
+              <Link
+                href="/login"
+                onClick={() => setMobileOpen(false)}
+                className="flex items-center gap-2 rounded-md px-3 py-2 text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
+              >
+                <LogIn className="h-4 w-4" />
+                Sign in
+              </Link>
+            )}
+          </div>
         </nav>
       )}
     </header>

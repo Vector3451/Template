@@ -22,4 +22,10 @@ export const config = {
     publishableKey: optionalEnv("NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY"),
     secretKey: optionalEnv("STRIPE_SECRET_KEY"),
   },
+  auth: {
+    nextAuthSecret: optionalEnv("NEXTAUTH_SECRET"),
+    nextAuthUrl: optionalEnv("NEXTAUTH_URL", "http://localhost:3000"),
+    googleClientId: optionalEnv("GOOGLE_CLIENT_ID"),
+    googleClientSecret: optionalEnv("GOOGLE_CLIENT_SECRET"),
+  },
 };
